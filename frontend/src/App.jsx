@@ -1,10 +1,16 @@
-function App() {
+import SelectTheme from "./components/SelectTheme.jsx";
+import HomePage from "./pages/HomePage.jsx";
+import { Route, Routes } from "react-router-dom";
 
+function App() {
   return (
-   <div className="text-3xl font-bold underline bg-purple-200">
-      Hello world!
-    </div>
-  )
+    <>
+      <SelectTheme theme="bumblebee" />
+      <Routes>
+        <Route exact path="/" element={<HomePage />} />
+      </Routes>
+    </>
+  );
 }
 
-export default App
+export default App;
