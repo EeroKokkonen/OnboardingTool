@@ -1,7 +1,9 @@
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
+const users = require("../models/users");
 
-const verifyToken = (req, res, next) => {
+
+const verifyToken = async (req, res, next) => {
   if (req.method === "OPTIONS") {
     return next();
   }
@@ -12,7 +14,10 @@ const verifyToken = (req, res, next) => {
       throw new Error("Authentication failed");
     }
     const decodedToken = jwt.verify(token, process.env.JWT_KEY);
-    req.userData = { userId: decodedToken.id };
+    const user = await users.findById(decodedToken.id);
+
+    req.userData = { userId: decodedToken.id,
+                      isAdmin: user.isAdmin === "1" };
     next();
   } catch (err) {
     res.status(401).send(err);
