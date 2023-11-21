@@ -1,33 +1,16 @@
 const pool = require("../db/pool");
 
-const users = {
-  create: (user) =>
-    new Promise((resolve, reject) => {
-      pool.getConnection((err, connection) => {
-        if (err) {
-          return reject(err);
-        }
+const tracks = {
 
-        connection.query("INSERT INTO users SET ?;", user, (err, result) => {
-          connection.release();
-          if (err) {
-            reject(err);
-          } else {
-            resolve(result);
-          }
-        });
-      });
-    }),
-    
-  findByEmail: (email) =>
+    findByUserId: (uid) =>
     new Promise((resolve, reject) => {
       pool.getConnection((err, connection) => {
         if (err) {
           return reject(err);
         }
         connection.query(
-          "SELECT * FROM users WHERE email LIKE ?;",
-          email,
+            'SELECT t.id, t.name FROM tracks t JOIN users_has_tracks uht ON t.id = uht.tracks_id WHERE uht.users_id = ?',
+          uid,
           (err, result) => {
             connection.release();
             if (err) {
@@ -38,14 +21,14 @@ const users = {
         );
       });
     }),
-  findById: (id) =>
+    findByTrackId: (id) =>
     new Promise((resolve, reject) => {
       pool.getConnection((err, connection) => {
         if (err) {
           return reject(err);
         }
         connection.query(
-          "SELECT name, email FROM users WHERE id LIKE ?;",
+            'SELECT * FROM tracks WHERE id = ?',
           id,
           (err, result) => {
             connection.release();
@@ -59,4 +42,4 @@ const users = {
     }),
 };
 
-module.exports = users;
+module.exports = tracks;
