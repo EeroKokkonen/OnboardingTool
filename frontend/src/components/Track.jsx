@@ -25,7 +25,7 @@ const Track = (props) => {
               max={task_max}
             ></progress>
             <button
-              className="btn"
+              className="btn  btn-primary"
               onClick={() => navigate(`/trackpage/${props.data.key}`)}
             >
               Open
