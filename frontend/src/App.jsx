@@ -1,21 +1,92 @@
+import React, { useState, useCallback, useEffect } from 'react';
+import { Route, Routes } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { AuthContext } from "./components/auth-context";
 import SelectTheme from "./components/SelectTheme.jsx";
 import HomePage from "./pages/HomePage.jsx";
 import TaskPage from "./pages/TaskPage.jsx";
 import TrackPage from "./pages/TrackPage.jsx";
 import Navbar from "./components/Navbar.jsx";
-import { Route, Routes } from "react-router-dom";
+import Authenticate from "./pages/Authenticate.jsx";
+
+
+const queryClient = new QueryClient();
+let logoutTimer;
+
 
 function App() {
+  const [token, setToken] = useState(false);
+  const [userId, setuser] = useState(false);
+  const [name, setname] = useState(false);
+  const [tokenExpirationDate, setTokenExpirationDate] = useState(false);
+
+  const login = useCallback((uid, token, name) => {
+    setToken(token);
+    setuser(uid);
+    setname(name);
+    const tokenExpirationDate = new Date(new Date().getTime() + 1000 * 60 * 60);
+    setTokenExpirationDate(tokenExpirationDate);
+    localStorage.setItem(
+      'userData',
+      JSON.stringify({
+        userId: uid,
+        token,
+        name,
+        expiration: tokenExpirationDate.toISOString(),
+      }),
+    );
+  }, []);
+
+  useEffect(() => {
+    const storedData = JSON.parse(localStorage.getItem('userData'));
+    if (storedData && storedData.token) {
+      login(storedData.userId, storedData.token);
+    }
+  }, [login]);
+
+  const logout = useCallback(() => {
+    setToken(null);
+    setuser(null);
+    setname('');
+    setTokenExpirationDate(null);
+    localStorage.removeItem('userData');
+  }, []);
+
+  useEffect(() => {
+    if (token && tokenExpirationDate) {
+      const remainingTime = tokenExpirationDate.getTime() - new Date().getTime();
+      logoutTimer = setTimeout(logout, remainingTime);
+    } else {
+      clearTimeout(logoutTimer);
+    }
+  }, [token, logout, tokenExpirationDate]);
+
+  /*TODO: 
+    routing by auth state
+  */
+
   return (
-    <>
+     <AuthContext.Provider
+      value={{
+        isLoggedIn: !!token,
+        token,
+        userId,
+        login,
+        logout,
+        name,
+      }}
+      >
+    <QueryClientProvider client={queryClient}>
       <SelectTheme theme="bumblebee" />
-      <Navbar/>
+      <Navbar logout={logout}/>
       <Routes>
+        <Route exact path="/auth" element={<Authenticate />} />
         <Route exact path="/" element={<HomePage />} />
         <Route path="track/:id" element={ <TrackPage/> } />
         <Route path="task/:id" element={<TaskPage />} />
       </Routes>
-    </>
+    </QueryClientProvider>
+    </AuthContext.Provider>
   );
 }
 

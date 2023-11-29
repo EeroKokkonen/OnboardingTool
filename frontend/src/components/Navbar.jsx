@@ -1,6 +1,9 @@
+import React, { useContext } from 'react';
+import { AuthContext } from "./auth-context";
 
+const Navbar = (props) => {
+  const auth = useContext(AuthContext);
 
-const Navbar = () => {
   return (
     <div className="navbar bg-base-100 shadow-md">
       <div className="navbar-start">
@@ -24,7 +27,12 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end">
+      {!auth.isLoggedIn && (
         <a className="btn btn-outline btn-secondary">Login</a>
+        )}
+        {auth.isLoggedIn && (
+        <a className="btn btn-outline btn-secondary" onClick={props.logout}>Logout</a>
+        )}
       </div>
   </div>
   );
