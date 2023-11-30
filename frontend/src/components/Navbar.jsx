@@ -28,7 +28,7 @@ const Navbar = (props) => {
       </div>
       <div className="navbar-end">
       {!auth.isLoggedIn && (
-        <a className="btn btn-outline btn-secondary">Login</a>
+        <a href="/auth" className="btn btn-outline btn-secondary">Login</a>
         )}
         {auth.isLoggedIn && (
         <a className="btn btn-outline btn-secondary" onClick={props.logout}>Logout</a>

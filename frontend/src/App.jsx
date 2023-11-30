@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { AuthContext } from "./components/auth-context";
 import SelectTheme from "./components/SelectTheme.jsx";
@@ -9,16 +9,16 @@ import TrackPage from "./pages/TrackPage.jsx";
 import Navbar from "./components/Navbar.jsx";
 import Authenticate from "./pages/Authenticate.jsx";
 
-
 const queryClient = new QueryClient();
-let logoutTimer;
 
+let logoutTimer;
 
 function App() {
   const [token, setToken] = useState(false);
   const [userId, setuser] = useState(false);
   const [name, setname] = useState(false);
   const [tokenExpirationDate, setTokenExpirationDate] = useState(false);
+  const navigate = useNavigate();
 
   const login = useCallback((uid, token, name) => {
     setToken(token);
@@ -35,6 +35,7 @@ function App() {
         expiration: tokenExpirationDate.toISOString(),
       }),
     );
+    navigate('/');
   }, []);
 
   useEffect(() => {
@@ -61,9 +62,28 @@ function App() {
     }
   }, [token, logout, tokenExpirationDate]);
 
-  /*TODO: 
-    routing by auth state
-  */
+
+    let routes;
+
+    if (token) {
+      routes = (
+        <React.Fragment>
+          <Route exact path="/" element={<HomePage />} />
+          <Route path="track/:id" element={ <TrackPage/> } />
+          <Route path="task/:id" element={<TaskPage />} />
+        </React.Fragment>
+      );
+    }
+    else {
+      routes = (
+        <React.Fragment>
+          <Route exact path="/auth" element={<Authenticate />} />
+          <Route exact path="/" element={<HomePage />} />
+          <Route path="track/:id" element={ <TrackPage/> } />
+          <Route path="task/:id" element={<TaskPage />} />
+        </React.Fragment>
+      );
+    }
 
   return (
      <AuthContext.Provider
@@ -80,10 +100,7 @@ function App() {
       <SelectTheme theme="bumblebee" />
       <Navbar logout={logout}/>
       <Routes>
-        <Route exact path="/auth" element={<Authenticate />} />
-        <Route exact path="/" element={<HomePage />} />
-        <Route path="track/:id" element={ <TrackPage/> } />
-        <Route path="task/:id" element={<TaskPage />} />
+        {routes}
       </Routes>
     </QueryClientProvider>
     </AuthContext.Provider>
