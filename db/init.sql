@@ -94,38 +94,11 @@ SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 -- -----------------------------------------------------
--- Data for table `OnboardingToolDB`.`tracks`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `OnboardingToolDB`;
-INSERT INTO `OnboardingToolDB`.`tracks` (`id`, `name`) VALUES (1, 'Kassan käyttö');
-
-COMMIT;
-
--- -----------------------------------------------------
 -- Data for table `OnboardingToolDB`.`users`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `OnboardingToolDB`;
 INSERT INTO `OnboardingToolDB`.`users` (`id`, `name`, `email`, `password`, `created`, `last_login`) VALUES ('fsd7f6dfg-..345,dfg7fg6asdj543nds843', 'Admin', 'admin@admin.com', 'admin', DEFAULT, DEFAULT);
-
-COMMIT;
-
--- -----------------------------------------------------
--- Data for table `OnboardingToolDB`.`tasks`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `OnboardingToolDB`;
-INSERT INTO `OnboardingToolDB`.`tasks` (`id`, `name`, `description`, `is_done`, `tracks_id`) VALUES (1, 'Tutustu kassaan', 'Tutustu kassan käyttöön', 0, 1);
-
-COMMIT;
-
--- -----------------------------------------------------
--- Data for table `OnboardingToolDB`.`users_has_tracks`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `OnboardingToolDB`;
-INSERT INTO `OnboardingToolDB`.`users_has_tracks` (`users_id`, `tracks_id`) VALUES ('fsd7f6dfg-..345,dfg7fg6asdj543nds843', 1);
 
 COMMIT;
 

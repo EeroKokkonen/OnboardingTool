@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { AuthContext } from "../components/auth-context";
 
 
 const taskData = {
@@ -9,6 +10,7 @@ const taskData = {
 };
 
 const TaskPage = () => {
+  const auth = useContext(AuthContext);
   const [isCompleted, setIsCompleted] = useState(taskData.isCompleted);
 
     return (
