@@ -21,7 +21,7 @@ USE `OnboardingToolDB` ;
 -- Table `OnboardingToolDB`.`tasks`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `OnboardingToolDB`.`tasks` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(85) NOT NULL,
   `description` VARCHAR(5000) NULL,
   `is_done` TINYINT NOT NULL DEFAULT 0,
@@ -42,7 +42,7 @@ ENGINE = InnoDB;
 -- Table `OnboardingToolDB`.`tracks`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `OnboardingToolDB`.`tracks` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(85) NOT NULL,
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
   PRIMARY KEY (`id`),
@@ -57,6 +57,7 @@ CREATE TABLE IF NOT EXISTS `OnboardingToolDB`.`users` (
   `id` VARCHAR(36) NOT NULL,
   `name` VARCHAR(100) NOT NULL,
   `email` VARCHAR(50) NOT NULL,
+  `job_role` VARCHAR(50) NOT NULL,
   `password` VARCHAR(60) NOT NULL,
   `isAdmin` TINYINT NOT NULL DEFAULT 0,
   `created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -65,7 +66,6 @@ CREATE TABLE IF NOT EXISTS `OnboardingToolDB`.`users` (
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
   UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE)
 ENGINE = InnoDB;
-
 
 -- -----------------------------------------------------
 -- Table `OnboardingToolDB`.`users_has_tracks`

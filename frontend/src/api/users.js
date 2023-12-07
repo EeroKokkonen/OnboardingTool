@@ -1,4 +1,5 @@
-export const signUpUser = async ({ name, email, password }) => {
+export const signUpUser = async ({ name, email, password, jobRole }) => {
+  console.log(name + email + password + jobRole)
   const res = await fetch(`http://localhost:3001/api/users/signup`, {
     method: 'POST',
     headers: {
@@ -8,6 +9,7 @@ export const signUpUser = async ({ name, email, password }) => {
     body: JSON.stringify({
       name,
       email,
+      jobRole,
       password,
     }),
   });

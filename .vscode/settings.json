@@ -12,7 +12,7 @@
             "name": "OnboardingTool",
             "database": "OnboardingToolDB",
             "username": "root",
-            "askForPassword": true
+            "password": "mysql"
         }
     ]
 }

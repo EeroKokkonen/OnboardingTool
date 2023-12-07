@@ -4,6 +4,6 @@ const verifyToken = require("../middleware/verifyToken");
 const { getTasksByTrackId } = require("../controllers/tasks");
 
 router.use(verifyToken);
-router.get("/:id", getTasksByTrackId);
+router.get("/:trackId", getTasksByTrackId);
 
 module.exports = router;

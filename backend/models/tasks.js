@@ -15,6 +15,7 @@ const tasks = {
             if (err) {
               return reject(err);
             }
+            console.log(id);
             resolve(result);
           }
         );
