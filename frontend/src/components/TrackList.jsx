@@ -2,7 +2,6 @@ import React from "react";
 import Track from "./Track";
 
 const TrackList = (props) => {
-  console.log(props.data);
   if (props.data) {
     return (
       <>

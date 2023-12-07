@@ -6,7 +6,6 @@ const Joi = require("joi");
 const tracksModel = require("../models/tracks");
 const signUpUser = async (req, res) => {
   const { name, email, password, jobRole } = req.body; // Assuming jobRole is provided during signup
-
   const UserSchema = Joi.object().keys({
     name: Joi.string()
       .min(3)
@@ -57,7 +56,6 @@ const signUpUser = async (req, res) => {
 
     // Get the tracks for the job role
     const tracks = getTracks(jobRole);
-    console.log(tracks);
     tracks.forEach(async (track) => {
       await tracksModel.addNewTrackAndTasks(
         newUser.id,
@@ -391,17 +389,12 @@ const getTracks = (userJobRole) => {
     },
   ];
 
-  // Example usage
-  console.log("Developer Tracks:", developerTracks);
-  console.log("HR Tracks:", hrTracks);
-  console.log("Cashier Tracks:", cashierTracks);
-
   let tracks = [];
   switch (userJobRole) {
-    case "HR Worker":
+    case "HR worker":
       tracks = hrTracks;
       break;
-    case "Software Developer":
+    case "Developer":
       tracks = developerTracks;
       break;
     case "Cashier":

@@ -45,7 +45,7 @@ const users = {
           return reject(err);
         }
         connection.query(
-          "SELECT name, email FROM users WHERE id LIKE ?;",
+          "SELECT name, email, job_role FROM users WHERE id LIKE ?;",
           id,
           (err, result) => {
             connection.release();
@@ -55,22 +55,6 @@ const users = {
             resolve(result);
           }
         );
-      });
-    }),
-    insertTask: (taskData) =>
-    new Promise((resolve, reject) => {
-      pool.getConnection((err, connection) => {
-        if (err) {
-          return reject(err);
-        }
-
-        connection.query('INSERT INTO tracks SET ?', taskData, (err, result) => {
-          connection.release();
-          if (err) {
-            return reject(err);
-          }
-          resolve(result.insertId);
-        });
       });
     }),
 };

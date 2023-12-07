@@ -28,7 +28,6 @@ CREATE TABLE IF NOT EXISTS `OnboardingToolDB`.`tasks` (
   `tracks_id` INT NOT NULL,
   PRIMARY KEY (`id`, `tracks_id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
-  UNIQUE INDEX `name_UNIQUE` (`name` ASC) VISIBLE,
   INDEX `fk_tasks_tracks1_idx` (`tracks_id` ASC) VISIBLE,
   CONSTRAINT `fk_tasks_tracks1`
     FOREIGN KEY (`tracks_id`)
@@ -45,8 +44,7 @@ CREATE TABLE IF NOT EXISTS `OnboardingToolDB`.`tracks` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(85) NOT NULL,
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `name_UNIQUE` (`name` ASC) VISIBLE)
+  PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
 
