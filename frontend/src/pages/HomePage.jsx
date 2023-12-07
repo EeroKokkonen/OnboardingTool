@@ -106,7 +106,7 @@ const HomePage = () => {
   useEffect(() => {
     if (storageData && storageData.userId && storageData.token) {
       getTracksByUserId(storageData.token, storageData.userId).then((res) => {
-        setTrackData(res[0]);
+        setTrackData(res);
       });
 
       getUserById(storageData.userId).then((res) => {
@@ -114,7 +114,7 @@ const HomePage = () => {
       });
     }
   }, []);
-  console.log(trackData);
+  //console.log(trackData);
   const content = (
     <>
       <div className="card card-body">

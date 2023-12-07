@@ -5,19 +5,12 @@ const Track = (props) => {
   const navigate = useNavigate();
   let task_max = 0;
   let task_done = 0;
-
-  props.data.task_data.forEach((task_data) => {
-    task_max += 1;
-    if (task_data.done) {
-      task_done += 1;
-    }
-  });
+  // TODO: Hae taskit backendistä ja laske progress
   return (
     <>
       <div className="card card-bordered">
         <div className="card-body">
-          <h3>{props.data.track_label}</h3>
-          <p>{props.data.track_desc}</p>
+          <h3>{props.data.name}</h3>
           <div className="card-actions">
             <progress
               className="progress"
