@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { AuthContext } from "./components/auth-context";
 import SelectTheme from "./components/SelectTheme.jsx";
@@ -18,7 +18,7 @@ function App() {
   const [userId, setuser] = useState(false);
   const [name, setname] = useState(false);
   const [tokenExpirationDate, setTokenExpirationDate] = useState(false);
-  const navigate = useNavigate();
+  
 
   const login = useCallback((uid, token, name) => {
     setToken(token);
@@ -35,7 +35,6 @@ function App() {
         expiration: tokenExpirationDate.toISOString(),
       }),
     );
-    navigate('/');
   }, []);
 
   useEffect(() => {

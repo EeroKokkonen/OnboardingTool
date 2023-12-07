@@ -1,11 +1,26 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
+import { getTasksByTrackId } from "../api/tasks";
+import { useEffect, useState } from "react";
 
 const Track = (props) => {
   const navigate = useNavigate();
-  let task_max = 0;
-  let task_done = 0;
-  // TODO: Hae taskit backendistä ja laske progress
+  const storageData = JSON.parse(localStorage.getItem("userData")) || null;
+  const [taskDone, setTaskDone] = useState(0);
+  const [trackData, setTrackData] = useState([]);
+  useEffect(() => {
+    if (storageData && storageData.userId && storageData.token) {
+      getTasksByTrackId(storageData.token, props.data.id).then((res) => {
+        if (res !== null && res.length >= 0) {
+          setTrackData(res);
+          for (let i in res) {
+            if (res[i].is_done) {
+              setTaskDone(taskDone + 1);
+            }
+          }
+        }
+      });
+    }
+  }, []);
   return (
     <>
       <div className="card card-bordered">
@@ -14,12 +29,12 @@ const Track = (props) => {
           <div className="card-actions">
             <progress
               className="progress"
-              value={task_done}
-              max={task_max}
+              value={taskDone}
+              max={trackData.length}
             ></progress>
             <button
               className="btn  btn-primary"
-              onClick={() => navigate(`/trackpage/${props.data.key}`)}
+              onClick={() => navigate(`/track/${props.data.id}`)}
             >
               Open
             </button>
@@ -30,4 +45,5 @@ const Track = (props) => {
     </>
   );
 };
+
 export default Track;

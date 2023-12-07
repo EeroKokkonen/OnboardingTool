@@ -2,12 +2,14 @@ import React, {
   useRef, useState, useContext
 } from 'react';
 import { useMutation } from 'react-query';
+import { useNavigate } from "react-router-dom";
 import { signUpUser, loginUser } from '../api/users';
 import { AuthContext } from '../components/auth-context';
 import Notification from '../components/Notification';
 import LoadingSpinner from '../components/LoadingSpinner';
 
 const Authenticate = () => {
+  const navigate = useNavigate();
   const nameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -32,9 +34,9 @@ const Authenticate = () => {
         return;
       }
       auth.login(data.id, data.token, data.name);
+      navigate('/');
     },
     onError: (error) => {
-      console.log(error);
       //TODO: get error message from backend
       setNoficationMessage("Something went wrong");
     },
@@ -44,14 +46,12 @@ const Authenticate = () => {
     mutationFn: loginUser,
     onSuccess: (data) => {
       if (data.error) {
-        console.log(data)
         setNoficationMessage(data.error);
         setNotificationVisible(true);
         return;
       }
-      console.log(data);
       auth.login(data.id, data.token, data.name);
-      console.log(auth)
+      navigate('/');
     },
     onError: (error) => {
       console.log(error);

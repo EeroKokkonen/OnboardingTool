@@ -101,20 +101,21 @@ const HomePage = () => {
   const auth = useContext(AuthContext);
   const storageData = JSON.parse(localStorage.getItem("userData")) || null;
   const [userName, setUserName] = useState(null);
+  const [jobRole, setJobRole] = useState(null);
   const [trackData, setTrackData] = useState(null);
 
   useEffect(() => {
     if (storageData && storageData.userId && storageData.token) {
       getTracksByUserId(storageData.token, storageData.userId).then((res) => {
         setTrackData(res);
+        console.log(res);
       });
-
       getUserById(storageData.userId).then((res) => {
         setUserName(res[0].name);
+        setJobRole(res[0].job_role)
       });
     }
   }, []);
-  //console.log(trackData);
   const content = (
     <>
       <div className="card card-body">
@@ -124,7 +125,7 @@ const HomePage = () => {
             <div className="card-body">
               <h1>Welcome to {placeholder.companyName} onboarding tool</h1>
               <p style={{ textTransform: "capitalize" }}>{userName}</p>
-              <p style={{ textTransform: "capitalize" }}>{placeholder.role}</p>
+              <p style={{ textTransform: "capitalize" }}>{jobRole}</p>
               <br></br>
               <div className="">
                 <TrackList data={trackData} />
