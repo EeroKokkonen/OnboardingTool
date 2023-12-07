@@ -2,9 +2,10 @@ POST http://localhost:3001/api/users/signup
 Content-Type: application/json
 
 {
-  "name": "Admin Admin",
-  "email": "admin1@admin.com",
-  "password": "Admin123"
+  "name": "Amfdsdfsd",
+  "email": "dsami@admin.com",
+  "password": "Amin21s13",
+  "jobRole": "HR Worker"
 }
 
 ###
@@ -13,15 +14,15 @@ POST http://localhost:3001/api/users/login
 Content-Type: application/json
 
 {
-  "email": "admin1@admin.com",
-  "password": "Admin123"
+  "email": "dsami@admin.com",
+  "password": "Amin21s13"
 }
 
 ###
 GET http://localhost:3001/api/tracks/{{uid}}
 Authorization: BEARER {{authToken}}
 ###
-GET http://localhost:3001/api/tasks/1
+GET http://localhost:3001/api/tasks/11
 Authorization: BEARER {{authToken}}
 ###
 

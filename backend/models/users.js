@@ -57,6 +57,22 @@ const users = {
         );
       });
     }),
+    insertTask: (taskData) =>
+    new Promise((resolve, reject) => {
+      pool.getConnection((err, connection) => {
+        if (err) {
+          return reject(err);
+        }
+
+        connection.query('INSERT INTO tracks SET ?', taskData, (err, result) => {
+          connection.release();
+          if (err) {
+            return reject(err);
+          }
+          resolve(result.insertId);
+        });
+      });
+    }),
 };
 
 module.exports = users;

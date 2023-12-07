@@ -11,6 +11,7 @@ const Authenticate = () => {
   const nameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
+  const jobRoleRef = useRef();
 
   const [isLoginMode, setLoginMode] = useState(true);
   const [notificationMessage, setNoficationMessage] = useState('');
@@ -70,6 +71,7 @@ const Authenticate = () => {
         signUpUserMutation.mutate({
           name: nameRef.current.value,
           email: emailRef.current.value,
+          jobRole: jobRoleRef.current.value,
           password: passwordRef.current.value,
         });
       }
@@ -78,7 +80,7 @@ const Authenticate = () => {
     }
     setIsSubmitting(false);
   };
-
+  
   return (
     <div className="hero min-h-screen bg-base-200">
       <div className="hero-content flex-col lg:flex-row-reverse">
@@ -107,6 +109,14 @@ const Authenticate = () => {
             )}
             {!isLoginMode && (
               <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Job role</span>
+                </label>
+                <select class="select select-bordered" ref={jobRoleRef}>
+                  <option>Cashier</option>
+                  <option>HR worker</option>
+                  <option>Developer</option>
+                </select>
                 <label className="label">
                   <span className="label-text">Name</span>
                 </label>

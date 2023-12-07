@@ -15,29 +15,27 @@ const trackData = [{
 ];
 
 const TrackPage = () => {
-    let completionState = "not completed";
-    let completionPadgeClass = "error";
 
+    let badge = null;
     return ( 
         <div className="flex flex-col items-center  container mx-auto mt-6">
             <div className="prose mb-6">
                 <h1>Products refunding track</h1>
             </div>
             {trackData.map((e)  => {
-                if(e.complited === false){
-                    completionState = "Not completed"
-                    completionPadgeClass = "error";
+                
+                if(e.complited){
+                    badge = <div className="badge badge-success my-0">Completed</div>
                 }
-                else if(e.complited === true){
-                    completionState = "Complited"
-                    completionPadgeClass = "success";
+                else {
+                    badge = <div className="badge badge-error my-0">Not completed</div>
                 }
 
                 return (
                     <div className="prose card w-96 bg-base-100 shadow-xl my-4" key={e.name}>
                         <div className="card-body">
                             <h2 className="my-0">{e.name}</h2>
-                            <div className={`badge badge-${completionPadgeClass} my-0`}>{completionState}</div>
+                            {badge}
                             <div className="card-actions justify-end mt-0">
                                 <button className="btn btn-primary">View</button>
                             </div>

@@ -21,7 +21,7 @@ USE `OnboardingToolDB` ;
 -- Table `OnboardingToolDB`.`tasks`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `OnboardingToolDB`.`tasks` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(85) NOT NULL,
   `description` VARCHAR(5000) NULL,
   `is_done` TINYINT NOT NULL DEFAULT 0,
@@ -42,7 +42,7 @@ ENGINE = InnoDB;
 -- Table `OnboardingToolDB`.`tracks`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `OnboardingToolDB`.`tracks` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(85) NOT NULL,
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
   PRIMARY KEY (`id`),
@@ -57,6 +57,7 @@ CREATE TABLE IF NOT EXISTS `OnboardingToolDB`.`users` (
   `id` VARCHAR(36) NOT NULL,
   `name` VARCHAR(100) NOT NULL,
   `email` VARCHAR(50) NOT NULL,
+  `job_role` VARCHAR(50) NOT NULL,
   `password` VARCHAR(60) NOT NULL,
   `isAdmin` TINYINT NOT NULL DEFAULT 0,
   `created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -65,7 +66,6 @@ CREATE TABLE IF NOT EXISTS `OnboardingToolDB`.`users` (
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
   UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE)
 ENGINE = InnoDB;
-
 
 -- -----------------------------------------------------
 -- Table `OnboardingToolDB`.`users_has_tracks`
@@ -94,38 +94,11 @@ SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 -- -----------------------------------------------------
--- Data for table `OnboardingToolDB`.`tracks`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `OnboardingToolDB`;
-INSERT INTO `OnboardingToolDB`.`tracks` (`id`, `name`) VALUES (1, 'Kassan käyttö');
-
-COMMIT;
-
--- -----------------------------------------------------
 -- Data for table `OnboardingToolDB`.`users`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `OnboardingToolDB`;
 INSERT INTO `OnboardingToolDB`.`users` (`id`, `name`, `email`, `password`, `created`, `last_login`) VALUES ('fsd7f6dfg-..345,dfg7fg6asdj543nds843', 'Admin', 'admin@admin.com', 'admin', DEFAULT, DEFAULT);
-
-COMMIT;
-
--- -----------------------------------------------------
--- Data for table `OnboardingToolDB`.`tasks`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `OnboardingToolDB`;
-INSERT INTO `OnboardingToolDB`.`tasks` (`id`, `name`, `description`, `is_done`, `tracks_id`) VALUES (1, 'Tutustu kassaan', 'Tutustu kassan käyttöön', 0, 1);
-
-COMMIT;
-
--- -----------------------------------------------------
--- Data for table `OnboardingToolDB`.`users_has_tracks`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `OnboardingToolDB`;
-INSERT INTO `OnboardingToolDB`.`users_has_tracks` (`users_id`, `tracks_id`) VALUES ('fsd7f6dfg-..345,dfg7fg6asdj543nds843', 1);
 
 COMMIT;
 

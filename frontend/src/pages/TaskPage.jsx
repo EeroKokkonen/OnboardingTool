@@ -1,21 +1,27 @@
+import { useState } from "react";
+import { AuthContext } from "../components/auth-context";
+
+
 const taskData = {
   name: "Dummy data",
   description:
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ",
+  isCompleted: true,
 };
 
 const TaskPage = () => {
+  const auth = useContext(AuthContext);
+  const [isCompleted, setIsCompleted] = useState(taskData.isCompleted);
+
     return (
-        <div className="container mx-auto mt-8">
-      <div className="max-w-xl mx-auto bg-white shadow-md rounded-md overflow-hidden">
-        <div className="p-6 bg-gradient-to-r from-indigo-400 to-blue-500 text-white">
-          <h2 className="text-3xl font-semibold mb-4">{taskData.name}</h2>
-          <p className="text-gray-200 mb-4">{taskData.description}</p>
-          <div className="flex justify-end">
-            <button className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 focus:outline-none focus:shadow-outline-green active:bg-green-800">
-              Complete
-            </button>
-          </div>
+
+      <div class={`hero min-h-screen bg-opacity-70 ${isCompleted ? "bg-success" : "bg-primary"}`}>
+      <div class={`hero-content text-center rounded-2xl`}>
+        <div class="max-w-3xl">
+          <h1 class="text-5xl font-bold">{taskData.name}</h1>
+          <p class="py-6">{taskData.description}</p>
+          <p class="py-6">LINKKI</p>
+          <button onClick={e => setIsCompleted(!isCompleted)} className={isCompleted ? "btn btn-error" : "btn btn-success"}>{isCompleted ? "Uncomplete" : "Complete"}</button>
         </div>
       </div>
     </div>
