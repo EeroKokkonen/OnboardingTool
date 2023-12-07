@@ -1,9 +1,9 @@
 export const signUpUser = async ({ name, email, password }) => {
   const res = await fetch(`http://localhost:3001/api/users/signup`, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
+      Accept: "application/json",
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
       name,
@@ -17,10 +17,10 @@ export const signUpUser = async ({ name, email, password }) => {
 
 export const loginUser = async ({ email, password }) => {
   const res = await fetch(`http://localhost:3001/api/users/login`, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
+      Accept: "application/json",
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
       email,
@@ -32,16 +32,16 @@ export const loginUser = async ({ email, password }) => {
 
 export const logoutUser = async () => {
   const res = await fetch(`http://localhost:3001/api/users/login`, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
+      Accept: "application/json",
+      "Content-Type": "application/json",
     },
   });
   return await res.json();
 };
 
 export const getUserById = async (userId) => {
-  const res = await fetch(`http://localhost:3001/api/users/login/api/users/${userId}`);
+  const res = await fetch(`http://localhost:3001/api/users/${userId}`);
   return await res.json();
 };

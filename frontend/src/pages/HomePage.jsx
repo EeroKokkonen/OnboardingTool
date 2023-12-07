@@ -1,5 +1,9 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { getUserById } from "../api/users";
+import { getTracksByUserId } from "../api/tracks";
 import TrackList from "../components/TrackList";
+import { AuthContext } from "../components/auth-context";
+
 /* example data. not final format, replace with fetch */
 const test_data = [
   {
@@ -86,26 +90,64 @@ const test_data = [
     ],
   },
 ];
-const data = test_data[0];
+
+const placeholder = {
+  role: "worker",
+  companyName: "Company",
+  trackData: test_data[0].track_data,
+};
+
 const HomePage = () => {
-  return (
+  const auth = useContext(AuthContext);
+  const storageData = JSON.parse(localStorage.getItem("userData")) || null;
+  const [userName, setUserName] = useState(null);
+  const [trackData, setTrackData] = useState(null);
+
+  useEffect(() => {
+    if (storageData && storageData.userId && storageData.token) {
+      getTracksByUserId(storageData.token, storageData.userId).then((res) => {
+        setTrackData(res[0]);
+      });
+
+      getUserById(storageData.userId).then((res) => {
+        setUserName(res[0].name);
+      });
+    }
+  }, []);
+  console.log(trackData);
+  const content = (
     <>
       <div className="card card-body">
-        <div>
-          <h1>Welcome Company onboarding tool, {data.first_name}</h1>
-        </div>
-        <div className="drawer divider divider-horizontal">
+        <div></div>
+        <div className="">
           <div className="card card-bordered">
-            <div className="card-body"></div>
-            <h1>User Info</h1>
-            <p>
-              Name: {data.first_name} {data.surname}
-            </p>
-            <p>Role: {data.role}</p>
+            <div className="card-body">
+              <h1>Welcome to {placeholder.companyName} onboarding tool</h1>
+              <p style={{ textTransform: "capitalize" }}>{userName}</p>
+              <p style={{ textTransform: "capitalize" }}>{placeholder.role}</p>
+              <br></br>
+              <div className="">
+                <TrackList data={trackData} />
+              </div>
+            </div>
           </div>
         </div>
-        <TrackList data={data.track_data} />
       </div>
+    </>
+  );
+
+  const contentNoAuth = (
+    <div className="card card-body">
+      <div>
+        <h1>Please Login to continue</h1>
+      </div>
+    </div>
+  );
+
+  return (
+    <>
+      {auth.isLoggedIn && content}
+      {!auth.isLoggedIn && contentNoAuth}
     </>
   );
 };
