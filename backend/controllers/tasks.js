@@ -1,7 +1,4 @@
-const tracks = require("../models/tracks");
 const tasks = require("../models/tasks");
-
-
 
 const getTasksByTrackId = async (req, res) => {
     const trackId = req.params.trackId;

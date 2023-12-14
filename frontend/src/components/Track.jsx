@@ -26,13 +26,13 @@ const Track = (props) => {
 
   return (
     <>
-      <div className="card card-bordered">
+      <div className="card card-bordered shadow-lg">
         <div className="card-body">
-          <h3>{props.data.name}</h3>
+          <h3 className="text-xl font-bold">{props.data.name}</h3>
           <div className="card-actions">
             <TrackProgress data={trackData} />
             <button
-              className="btn  btn-primary"
+              className="btn btn-primary"
               onClick={() => navigate(`/track/${props.data.id}`)}
             >
               Open

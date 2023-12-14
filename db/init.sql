@@ -10,10 +10,6 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema OnboardingToolDB
 -- -----------------------------------------------------
-
--- -----------------------------------------------------
--- Schema OnboardingToolDB
--- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `OnboardingToolDB` DEFAULT CHARACTER SET utf8 ;
 USE `OnboardingToolDB` ;
 
@@ -24,6 +20,7 @@ CREATE TABLE IF NOT EXISTS `OnboardingToolDB`.`tasks` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(85) NOT NULL,
   `description` VARCHAR(5000) NULL,
+  `media_link` VARCHAR(500) NULL,
   `is_done` TINYINT NOT NULL DEFAULT 0,
   `tracks_id` INT NOT NULL,
   PRIMARY KEY (`id`, `tracks_id`),

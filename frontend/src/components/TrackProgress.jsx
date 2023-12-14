@@ -10,7 +10,7 @@ const TrackProgress = (props) => {
   return (
     <>
       <progress
-        className="progress"
+        className="progress progress-success"
         value={doneCounter}
         max={props.data.length}
       ></progress>

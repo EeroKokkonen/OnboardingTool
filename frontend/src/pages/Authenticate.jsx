@@ -82,10 +82,10 @@ const Authenticate = () => {
   };
   
   return (
-    <div className="hero min-h-screen bg-base-200">
-      <div className="hero-content flex-col lg:flex-row-reverse">
+    <div className="hero min-h-screen w-full bg-base-200">
+      <div className="hero-content w-2/5 min-w-min flex-col lg:flex-row-reverse">
         <div className="text-center lg:text-left" />
-        <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+        <div className="card flex-shrink-0 w-full max-w-2xl shadow-2xl bg-base-100">
           <form onSubmit={onSubmitHandler} className="card-body">
             <h1 className="text-3xl text-center font-bold">
               {isLoginMode ? 'Login' : 'Signup'}
@@ -112,7 +112,7 @@ const Authenticate = () => {
                 <label className="label">
                   <span className="label-text">Job role</span>
                 </label>
-                <select class="select select-bordered" ref={jobRoleRef}>
+                <select className="select select-bordered" ref={jobRoleRef}>
                   <option>Cashier</option>
                   <option>HR worker</option>
                   <option>Developer</option>

@@ -82,10 +82,11 @@ const tracks = {
 
                   // Insert new tasks for the newly created track
                   const tasksInsertQuery =
-                    "INSERT INTO tasks (name, description, is_done, tracks_id) VALUES ?";
+                    "INSERT INTO tasks (name, description, media_link, is_done, tracks_id) VALUES ?";
                   const tasksDataValues = taskData.map((task) => [
                     task.name,
                     task.description,
+                    task.media_link ?? "",
                     "0",
                     newTrackID,
                   ]);

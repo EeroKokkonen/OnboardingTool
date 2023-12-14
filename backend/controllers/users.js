@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const users = require("../models/users");
 const Joi = require("joi");
 const tracksModel = require("../models/tracks");
+
 const signUpUser = async (req, res) => {
   const { name, email, password, jobRole } = req.body; // Assuming jobRole is provided during signup
   const UserSchema = Joi.object().keys({
@@ -144,12 +145,14 @@ const getTracks = (userJobRole) => {
           description:
             "Install necessary IDEs, version control systems, and required tools.",
           is_done: "0",
+          media_link: "https://www.google.com/",
         },
         {
           name: "Codebase Familiarization",
           description:
             "Understand the structure and components of the existing codebase.",
           is_done: "0",
+          media_link: "https://www.google.com/",
         },
         {
           name: "Version Control Basics",
@@ -174,12 +177,14 @@ const getTracks = (userJobRole) => {
           description:
             "Brush up on or learn the primary programming languages used in the organization.",
           is_done: "0",
+          media_link: "https://www.google.com/",
         },
         {
           name: "Algorithm and Data Structures",
           description:
             "Gain proficiency in common algorithms and data structures.",
           is_done: "0",
+          media_link: "https://www.google.com/",
         },
         {
           name: "Testing Basics",
@@ -204,12 +209,14 @@ const getTracks = (userJobRole) => {
           description:
             "Understand the agile development process and participate in sprint activities.",
           is_done: "0",
+          media_link: "https://www.google.com/",
         },
         {
           name: "Collaborative Tools",
           description:
             "Familiarize yourself with collaboration tools like Jira or Trello.",
           is_done: "0",
+          media_link: "https://www.google.com/",
         },
         {
           name: "Team Communication",
@@ -237,11 +244,13 @@ const getTracks = (userJobRole) => {
           name: "Organizational Overview",
           description:
             "Understand the company's mission, values, and organizational structure.",
+          media_link: "https://www.google.com/",
         },
         {
           name: "HR Policies and Procedures",
           description:
             "Familiarize yourself with company HR policies and procedures.",
+          media_link: "https://www.google.com/",
         },
         {
           name: "HR Systems Training",
@@ -263,16 +272,19 @@ const getTracks = (userJobRole) => {
           name: "Conflict Resolution",
           description:
             "Understand and practice conflict resolution techniques.",
+          media_link: "https://www.google.com/"
         },
         {
           name: "Employee Engagement",
           description:
             "Learn strategies to enhance employee engagement within the organization.",
+          media_link: "https://www.google.com/",
         },
         {
           name: "Performance Appraisals",
           description:
             "Participate in the performance appraisal process and understand its components.",
+          media_link: "https://www.google.com/",
         },
         {
           name: "Employee Training and Development",
@@ -289,16 +301,19 @@ const getTracks = (userJobRole) => {
           name: "Employment Law Basics",
           description:
             "Gain knowledge of labor laws and regulations applicable to your organization.",
+          media_link: "https://www.google.com/",
         },
         {
           name: "Diversity and Inclusion",
           description:
             "Understand the importance of diversity and inclusion in the workplace.",
+          media_link: "https://www.google.com/",
         },
         {
           name: "Workplace Safety",
           description:
             "Learn about workplace safety regulations and practices.",
+          media_link: "https://www.google.com/",
         },
         {
           name: "HR Compliance Audits",
@@ -318,11 +333,13 @@ const getTracks = (userJobRole) => {
           name: "POS System Navigation",
           description:
             "Learn how to navigate the POS system used by the organization.",
+            media_link: "https://www.google.com/",
         },
         {
           name: "Transaction Processing",
           description:
             "Understand the steps involved in processing various types of transactions.",
+            media_link: "https://www.google.com/",
         },
         {
           name: "Cash Handling Procedures",
@@ -344,10 +361,12 @@ const getTracks = (userJobRole) => {
           name: "Product Catalog Familiarization",
           description:
             "Understand the range of products sold by the organization.",
+            media_link: "https://www.google.com/",
         },
         {
           name: "Promotions and Discounts",
           description: "Learn about ongoing promotions and discount programs.",
+          media_link: "https://www.google.com/",
         },
         {
           name: "Inventory Management Basics",
@@ -369,11 +388,13 @@ const getTracks = (userJobRole) => {
           name: "Effective Communication",
           description:
             "Improve communication skills for positive customer interactions.",
+            media_link: "https://www.google.com/",
         },
         {
           name: "Handling Customer Complaints",
           description:
             "Learn strategies for handling customer complaints and resolving issues.",
+            media_link: "https://www.google.com/",
         },
         {
           name: "Team Collaboration",

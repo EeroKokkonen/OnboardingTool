@@ -45,30 +45,29 @@ const HomePage = () => {
   }, []);
 
   const content = (
-    <>
-      <div className="card card-body">
-        <div></div>
-        <div className="">
-          <div className="card card-bordered">
-            <div className="card-body">
-              <h1>Welcome to {placeholder.companyName} onboarding tool</h1>
-              <p style={{ textTransform: "capitalize" }}>{userName}</p>
-              <p style={{ textTransform: "capitalize" }}>{jobRole}</p>
+    <div className="bg-base-200 h-screen flex justify-center min-h-screen h-fit">
+      <div className="card card-body max-w-4xl">
+          <div className="card card-bordered bg-base-100">
+            <div className="card-body shadow-lg">
+              <h1 className="text-3xl font-bold mb-6">Welcome to {placeholder.companyName} onboarding tool</h1>
+              <p className="text-2xl" style={{ textTransform: "capitalize" }}>{userName}</p>
+              <p className="text-sm font-bold" style={{ textTransform: "capitalize" }}>{jobRole}</p>
               <br></br>
               <div className="">
                 <TrackList data={trackData} />
               </div>
             </div>
           </div>
-        </div>
       </div>
-    </>
+    </div>
   );
 
   const contentNoAuth = (
-    <div className="card card-body">
-      <div>
-        <h1>Please Login to continue</h1>
+    <div class="hero min-h-screen bg-base-200">
+      <div class="hero-content text-center">
+        <div class="max-w-md">
+          <h1 class="text-4xl font-bold">Please Login to continue</h1>
+        </div>
       </div>
     </div>
   );

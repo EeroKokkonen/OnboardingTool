@@ -33,7 +33,10 @@ const TaskPage = () => {
         <div className="max-w-3xl">
           <h1 className="text-5xl font-bold">{taskData.name}</h1>
           <p className="py-6">{taskData.description}</p>
-          <p className="py-6">LINKKI</p>
+          {taskData.media_link != "" ?
+          <p className="link py-6"><a href={taskData.media_link}>Watch this video</a></p>
+           : <p></p>}
+          
           <button onClick={handleOnClick} className={isCompleted ? "btn btn-error" : "btn btn-success"}>{isCompleted ? "Uncomplete" : "Complete"}</button>
         </div>
       </div>
